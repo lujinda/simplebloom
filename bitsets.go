@@ -1,20 +1,24 @@
 package simplebloom
 
-type BitSets []byte
+type BitSets []int64
 
 func NewBitSets(n uint) BitSets {
-	bs := make(BitSets, n)
+	bs := make(BitSets, n/64+1)
 	return bs
 }
 
 func (bs BitSets) Set(index uint) {
-	bs[index] = 1
+	index, bit := index/64, index%64
+	bs[index] |= 1 << bit
 }
 
 func (bs BitSets) Unset(index uint) {
-	bs[index] = 0
+	index, bit := index/64, index%64
+	bs[index] ^= 1 << bit
 }
 
 func (bs BitSets) IsSet(index uint) bool {
-	return bs[index] == 1
+	index, bit := index/64, index%64
+	word := bs[index]
+	return (word | (1 << bit)) == word
 }

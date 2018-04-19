@@ -1,6 +1,8 @@
 一个实现简单的bloom filter, 可以使用内存， 文件， redis三种工作方式 `MemoryBloomFilter`, `FileBloomFilter`, `RedisBloomFilter`
 
-test
+
+
+__test__
 
 ```
 package simplebloom
